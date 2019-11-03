@@ -64,7 +64,7 @@ LOAD DATA INFILE 'ChargesAndPayments.csv' INTO TABLE ChargesAndPayments FIELDS T
 -- TODO: answer the following queries
 
 -- a) List all diagnostic names in alphabetical order (no repetition).
-
+SELECT drgDesc AS "Diagnostic Name" FROM drgs GROUP BY drgDesc ORDER BY drgDesc ASC;
 
 
 -- b) List the names and correspondent states of all of the providers 
