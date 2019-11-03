@@ -1,8 +1,8 @@
 --
 -- CS 3810 - Principles of Database Systems - Fall 2019
 -- DBA03: The "ipps" database
--- Date:
--- Name(s):
+-- Date: 11/3/2019
+-- Name(s): DEREK HOLSAPPLE, JUSTIN STRELKA
 --
 
 -- create database
