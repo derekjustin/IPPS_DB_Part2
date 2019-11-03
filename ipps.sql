@@ -94,6 +94,8 @@ SELECT COUNT(DISTINCT hrrId) AS "Total HHR's" FROM hrrs;
 
 
 -- f) List the number (distinct) of HRRs per state (also printing out the state).
+SELECT hrrState AS "State", COUNT(DISTINCT hrrId) AS "State Total HRR's"
+FROM hrrs GROUP BY hrrState ORDER BY hrrState ASC;
 
 
 
