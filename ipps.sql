@@ -101,7 +101,8 @@ FROM hrrs GROUP BY hrrState ORDER BY hrrState ASC;
 
 -- g) List all of the (distinct) providers in the state of Pennsylvania 
 --    in alphabetical order.
-
+SELECT DISTINCT prvName AS "Pennsylvania Providers" 
+FROM providers WHERE prvState = "PA";
 
 
 -- h) List the top 10 providers (with their correspondent state) that charged the most for 
