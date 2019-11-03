@@ -79,13 +79,13 @@ ORDER BY prvState ASC;
 
 
 -- c) List the number of (distinct) providers.
-SELECT COUNT(DISTINCT prvId) AS "Total Distinct Providers"
+SELECT COUNT(DISTINCT prvName) AS "Total Distinct Providers"
 FROM providers;
 
 
 -- d) List the number of (distinct) providers per state in alphabetical 
 --    order (also printing out the state).
-SELECT prvState AS "State", COUNT(DISTINCT prvId) AS "State Total Providers"
+SELECT prvState AS "State", COUNT(DISTINCT prvName) AS "State Total Providers"
 FROM providers GROUP BY prvState ORDER BY prvState ASC;
 
 
