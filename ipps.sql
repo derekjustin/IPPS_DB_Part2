@@ -64,16 +64,23 @@ LOAD DATA INFILE 'ChargesAndPayments.csv' INTO TABLE ChargesAndPayments FIELDS T
 -- TODO: answer the following queries
 
 -- a) List all diagnostic names in alphabetical order (no repetition).
-SELECT drgDesc AS "Diagnostic Name" FROM drgs GROUP BY drgDesc ORDER BY drgDesc ASC;
+SELECT drgDesc AS "Diagnostic Name" FROM drgs 
+GROUP BY drgDesc 
+ORDER BY drgDesc ASC;
 
 
 -- b) List the names and correspondent states of all of the providers 
 --    in alphabetical order (state first, provider name next, no repetition).
-
+SELECT prvState AS "Provider State", 
+prvName AS "Provider Name" 
+FROM providers
+GROUP BY prvState, prvName 
+ORDER BY prvState ASC; 
 
 
 -- c) List the number of (distinct) providers.
-
+SELECT COUNT(DISTINCT prvId) AS "Total Distinct Providers"
+FROM providers;
 
 
 -- d) List the number of (distinct) providers per state in alphabetical 
