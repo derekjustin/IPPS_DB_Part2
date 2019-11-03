@@ -98,7 +98,6 @@ SELECT hrrState AS "State", COUNT(DISTINCT hrrId) AS "State Total HRR's"
 FROM hrrs GROUP BY hrrState ORDER BY hrrState ASC;
 
 
-
 -- g) List all of the (distinct) providers in the state of Pennsylvania 
 --    in alphabetical order.
 SELECT DISTINCT prvName AS "Pennsylvania Providers" 
