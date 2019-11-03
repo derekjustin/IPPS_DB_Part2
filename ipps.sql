@@ -90,7 +90,7 @@ FROM providers GROUP BY prvState ORDER BY prvState ASC;
 
 
 -- e) List the number of (distinct) hospital referral regions (HRR).
-
+SELECT COUNT(DISTINCT hrrId) AS "Total HHR's" FROM hrrs;
 
 
 -- f) List the number (distinct) of HRRs per state (also printing out the state).
