@@ -107,6 +107,13 @@ FROM providers WHERE prvState = "PA";
 -- h) List the top 10 providers (with their correspondent state) that charged the most for 
 --    the clinical condition with code 308. Output should display the provider, their state, 
 --    and the average charged amount in descending order.
+SELECT prvName AS "Provider", 
+       prvState AS "State", 
+       avgTotalPayments AS "Average Charge Amt" 
+FROM providers p INNER JOIN chargesandpayments c ON p.prvId = c.prvId 
+WHERE c.drgCode = 308 ORDER BY avgTotalPayments DESC LIMIT 10;
+
+
 
 
 
