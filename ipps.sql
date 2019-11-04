@@ -125,6 +125,11 @@ WHERE c.dRgCode = 308 GROUP BY prvState ORDER BY ROUND(AVG(avgTotalPayments),2) 
 
 -- j) Which hospital and clinical condition pair had the highest difference between the 
 --    amount charged and the amount covered by health insurance?
-SELECT prvName AS "HOSPITAL NAME", dRGdesc AS "CLINICAL CONDITION", (avgTotalPayments - avgCoveredCharges) AS "COST DIFF" 
+SELECT prvName AS "HOSPITAL NAME", dRGdesc AS "CLINICAL CONDITION" 
+FROM (chargesandpayments c INNER JOIN drgs d ON c.dRgCode = d.dRgCode 
+INNER JOIN providers p ON c.prvId = p.prvId) ORDER BY (avgTotalPayments - avgCoveredCharges) DESC LIMIT 1;
+
+
+SELECT prvName AS "HOSPITAL NAME", dRGdesc AS "CLINICAL CONDITION", avgTotalPayments, avgCoveredCharges, (avgTotalPayments - avgCoveredCharges) AS "COST DIFF" 
 FROM (chargesandpayments c INNER JOIN drgs d ON c.dRgCode = d.dRgCode 
 INNER JOIN providers p ON c.prvId = p.prvId) ORDER BY (avgTotalPayments - avgCoveredCharges) DESC LIMIT 20;
