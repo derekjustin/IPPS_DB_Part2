@@ -114,13 +114,13 @@ FROM providers p INNER JOIN chargesandpayments c ON p.prvId = c.prvId
 WHERE c.drgCode = 308 ORDER BY avgTotalPayments DESC LIMIT 10;
 
 
-
-
-
 -- i) List the average charges of all providers per state for the clinical condition with 
 --    code 308. Output should display the state and the average charged amount per state in 
 --    descending order (of the charged amount) using only two decimals.
-
+SELECT prvState AS "STATE", 
+       ROUND(AVG(avgTotalPayments),2) AS "AVERAGE CHARGED AMOUNT" 
+FROM providers p INNER JOIN chargesandpayments c ON p.prvId = c.prvId
+WHERE c.dRgCode = 308 GROUP BY prvState ORDER BY ROUND(AVG(avgTotalPayments),2) DESC;
 
 
 -- j) Which hospital and clinical condition pair had the highest difference between the 
