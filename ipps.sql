@@ -1,8 +1,8 @@
 --
 -- CS 3810 - Principles of Database Systems - Fall 2019
 -- DBA03: The "ipps" database
--- Date: 11/3/2019
--- Name(s): DEREK HOLSAPPLE, JUSTIN STRELKA
+-- Date:
+-- Name(s):
 --
 
 -- create database
@@ -63,70 +63,22 @@ LOAD DATA INFILE 'ChargesAndPayments.csv' INTO TABLE ChargesAndPayments FIELDS T
 
 -- TODO: answer the following queries
 
--- a) List all diagnostic names in alphabetical order (no repetition).
-SELECT drgDesc AS "Diagnostic Name" FROM drgs 
-GROUP BY drgDesc 
-ORDER BY drgDesc ASC;
+-- a) List all diagnostic names in alphabetical order.
 
-
--- b) List the names and correspondent states of all of the providers 
---    in alphabetical order (state first, provider name next, no repetition).
-SELECT prvState AS "Provider State", 
-prvName AS "Provider Name" 
-FROM providers
-GROUP BY prvState, prvName 
-ORDER BY prvState ASC; 
-
+-- b) List the names and correspondent states (including Washington D.C.) of all of the providers in alphabetical order (state first, provider name next, no repetition).
 
 -- c) List the number of (distinct) providers.
-SELECT COUNT(DISTINCT prvName) AS "Total Distinct Providers"
-FROM providers;
 
-
--- d) List the number of (distinct) providers per state in alphabetical 
---    order (also printing out the state).
-SELECT prvState AS "State", COUNT(DISTINCT prvName) AS "State Total Providers"
-FROM providers GROUP BY prvState ORDER BY prvState ASC;
-
+-- d) List the number of (distinct) providers per state (including Washington D.C.) in alphabetical order (also printing out the state).
 
 -- e) List the number of (distinct) hospital referral regions (HRR).
-SELECT COUNT(DISTINCT hrrId) AS "Total HHR's" FROM hrrs;
-
 
 -- f) List the number (distinct) of HRRs per state (also printing out the state).
-SELECT hrrState AS "State", COUNT(DISTINCT hrrId) AS "State Total HRR's"
-FROM hrrs GROUP BY hrrState ORDER BY hrrState ASC;
 
+-- g) List all of the (distinct) providers in the state of Pennsylvania in alphabetical order.
 
--- g) List all of the (distinct) providers in the state of Pennsylvania 
---    in alphabetical order.
-SELECT DISTINCT prvName AS "Pennsylvania Providers" 
-FROM providers WHERE prvState = "PA";
+-- h) List the top 10 providers (with their correspondent state) that charged  (as described in avgTotalPayments) the most for the diagnose with code 308. Output should display the provider, their state, and the average charged amount in descending order.
 
+-- i) List the average charges (as described in avgTotalPayments) of all providers per state for the clinical condition with code 308. Output should display the state and the average charged amount per state in descending order (of the charged amount) using only two decimals.
 
--- h) List the top 10 providers (with their correspondent state) that charged the most for 
---    the clinical condition with code 308. Output should display the provider, their state, 
---    and the average charged amount in descending order.
-SELECT prvName AS "Provider", 
-       prvState AS "State", 
-       avgTotalPayments AS "Average Charge Amt" 
-FROM providers p INNER JOIN chargesandpayments c ON p.prvId = c.prvId 
-WHERE c.drgCode = 308 ORDER BY avgTotalPayments DESC LIMIT 10;
-
-
--- i) List the average charges of all providers per state for the clinical condition with 
---    code 308. Output should display the state and the average charged amount per state in 
---    descending order (of the charged amount) using only two decimals.
-SELECT prvState AS "STATE", 
-       ROUND(AVG(avgTotalPayments),2) AS "AVERAGE CHARGED AMOUNT" 
-FROM providers p INNER JOIN chargesandpayments c ON p.prvId = c.prvId
-WHERE c.dRgCode = 308 GROUP BY prvState ORDER BY ROUND(AVG(avgTotalPayments),2) DESC;
-
-
--- j) Which hospital and clinical condition pair had the highest difference between the 
---    amount charged and the amount covered by health insurance?
-SELECT prvName AS "HOSPITAL NAME", 
-        dRGdesc AS "CLINICAL CONDITION", 
-        (avgTotalPayments - avgMedicarePayments) AS "UNCOVERED COST"
-FROM (chargesandpayments c INNER JOIN drgs d ON c.dRgCode = d.dRgCode 
-INNER JOIN providers p ON c.prvId = p.prvId) ORDER BY (avgTotalPayments - avgMedicarePayments) DESC LIMIT 1;
+-- j) Which hospital and clinical condition pair had the highest difference between the amount charged  (as described in avgTotalPayments) and the amount covered by Medicare  (as described in avgMedicarePayments)?
